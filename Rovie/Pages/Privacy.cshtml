@@ -1,9 +1,8 @@
 ﻿@page
 @model PrivacyModel
 @{
-    ViewData["Title"] = "Создание комнаты";
-    //TODO: форма создания комнаты
+    ViewData["Title"] = @User.Identity?.Name!;
+    
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Форма заполнения.</p>
