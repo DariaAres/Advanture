@@ -1,0 +1,71 @@
+﻿@page
+@using Microsoft.AspNetCore.Http.Features
+@model TwoFactorAuthenticationModel
+@{
+    ViewData["Title"] = "Двухфакторная аутентификация (2ФА)";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<h3>@ViewData["Title"]</h3>
+@{
+    var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
+    @if (consentFeature?.CanTrack ?? true)
+    {
+        @if (Model.Is2faEnabled)
+        {
+            if (Model.RecoveryCodesLeft == 0)
+            {
+                <div class="alert alert-danger">
+                    <strong>У вас не осталось кодов восстановления.</strong>
+                    <p>Вы должны <a asp-page="./GenerateRecoveryCodes">генерировать новый набор кодов восстановления</a> прежде чем войти в систему с кодом восстановления.</p>
+                </div>
+            }
+            else if (Model.RecoveryCodesLeft == 1)
+            {
+                <div class="alert alert-danger">
+                    <strong>У вас остался 1 код восстановления.</strong>
+                    <p>Вы можете <a asp-page="./GenerateRecoveryCodes">создать новый набор кодов восстановления</a>.</p>
+                </div>
+            }
+            else if (Model.RecoveryCodesLeft <= 3)
+            {
+                <div class="alert alert-warning">
+                    <strong>Вы жолжны @Model.RecoveryCodesLeft оставлены коды восстановления.</strong>
+                    <p>Вам следует <a asp-page="./GenerateRecoveryCodes">генерировать новый набор кодов восстановления</a>.</p>
+                </div>
+            }
+
+            if (Model.IsMachineRemembered)
+            {
+                <form method="post" style="display: inline-block">
+                    <button type="submit" class="btn btn-primary">Забудьте об этом браузере</button>
+                </form>
+            }
+            <a asp-page="./Disable2fa" class="btn btn-primary">Отключить 2ФА</a>
+            <a asp-page="./GenerateRecoveryCodes" class="btn btn-primary">Reset recovery codes</a>
+        }
+
+        <h4>Authenticator app</h4>
+        @if (!Model.HasAuthenticator)
+        {
+            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Добавить приложение аутентификатора</a>
+        }
+        else
+        {
+            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Установите приложение аутентификатора</a>
+            <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-primary">Сброс приложения аутентификатора</a>
+        }
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Политика конфиденциальности и использования файлов cookie не принята.</strong>
+            <p>Вы должны принять политику, прежде чем включить двухфакторную аутентификацию.</p>
+        </div>
+    }
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
