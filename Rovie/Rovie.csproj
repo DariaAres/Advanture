@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Content Remove="Areas\Identity\Pages\Account\Manage\Index - Копировать.cshtml" />
+    <Content Remove="wwwroot\favicon_.ico" />
   </ItemGroup>
 
   <ItemGroup>
