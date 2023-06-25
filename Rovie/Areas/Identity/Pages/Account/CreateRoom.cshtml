@@ -3,9 +3,19 @@
 @{
     ViewData["Title"] = "Создание комнаты";
 }
+<br>
+<br>
+<br>
+<br>
 <h1>@ViewData["Title"]</h1>
-
-
+,
+<iframe width="560"
+        height="315"
+        src="https://www.youtube.com/embed/xUMkdZE7Q-Y"
+        frameborder="0"
+        allowfullscreen>
+    \
+</iframe>
 <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -17,6 +27,8 @@
                 <label asp-for="Name"></label>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+            
+            
             
             <button type="submit" class="w-100 btn btn-lg btn-primary" asp-page-handler="OnClick">Создать</button>
         </form>
