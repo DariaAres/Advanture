@@ -12,9 +12,11 @@ using System.Net.Mail;
 using System.Net;
 using System.Net.Http;
 using Rovie.Data;
+using System.Collections.Specialized;
 
 namespace Rovie.Areas.Identity.Pages.Account
 {
+    [IgnoreAntiforgeryToken]
     public class CreateRoom : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -37,10 +39,17 @@ namespace Rovie.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         [Required]
-        [Display(Name = "Название")]
+        [Display(Name = "Сообщение")]
         public string Name{get; set;}
 
-        public async Task<IActionResult> OnPostOnClickAsync()
+        public string Message { get; private set; } = "";
+        public void OnGet()
+        {
+            Message = "Введите свое имя";
+        }
+        
+
+        public async Task<IActionResult> OnPost(string message)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -50,24 +59,26 @@ namespace Rovie.Areas.Identity.Pages.Account
 
             Console.WriteLine(await _userManager.GetEmailAsync(user));
 
-            SendEmailAsync(await _userManager.GetEmailAsync(user)).GetAwaiter();
+            SendEmailAsync("kc023dascha@gmail.com", message).GetAwaiter();
             return RedirectToPage();
         }
-        private static async Task SendEmailAsync(string email)
+        private static async Task SendEmailAsync(string email, string massage)
         {
             try
             {
-                MailAddress from = new MailAddress("rovie.sup@gmail.com", "ROVIE support");
+                MailAddress from = new MailAddress("rovie.sup@gmail.com", "ADVANTURE support");
                 MailAddress to = new MailAddress(email);
                 MailMessage m = new MailMessage(from, to);
-                m.Subject = $"Ключь для доступа к вашей комнате";
-                m.Body = "Ключ: " + Key.GetUniqueKey(10);
+                m.Subject = $"Комментарий от пользователя блога";
+                
+                m.Body = $"'{email}' {massage}";
                 smtp = new SmtpClient("smtp.gmail.com", 587);
                 smtp.EnableSsl = true;
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.UseDefaultCredentials = false;
                 smtp.Credentials = new NetworkCredential(from.Address, "kmpiknnqigrvyhej");
                 await smtp.SendMailAsync(m);
+                Console.WriteLine(massage);
                 Console.WriteLine("Письмо отправлено");
             }
             catch (Exception ex)

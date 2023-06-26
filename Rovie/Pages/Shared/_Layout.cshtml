@@ -7,11 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Rovie.styles.css" asp-append-version="true" />
-    
+    <bgsound src="C:\Users\user\Source\Repos\Rovie\Rovie\Music\4292c85398d39d9.mid" loop="1">
 </head>
 <body>
-
-    <embed src="C:\Users\user\Source\Repos\Rovie\Rovie\Music\4292c85398d39d9.wav" height="60" width=144>
         <div class="myheader">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -26,7 +24,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Главная</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Прочее</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Исследование</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/MyWay">Мой путь</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Сonclusion">Выводы и советы</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -40,12 +44,12 @@
             @RenderBody()
         </main>
     </div>
-
+    
 
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Rovie - <a asp-area="" asp-page="/Privacy">Конфиденциальность</a>
+            &copy; 2023 - Advanture   <a asp-area="" asp-page="/Index">Главная</a>  <a asp-area="" asp-page="/Privacy">Исследование</a>  <a asp-area="" asp-page="/MyWay">Мой путь</a>  <a asp-area="" asp-page="/Сonclusion">Выводы и советы</a>  <a asp-area="" asp-page="/Account/CreateRoom">Оставить комментарий</a>  <a asp-area="" asp-page="/Account/Manage/Index">Настройки</a>   <a asp-area="" asp-page="/Contacts">Контакты</a>
         </div>
     </footer>
 

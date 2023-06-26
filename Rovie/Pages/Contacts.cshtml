@@ -1,0 +1,69 @@
+﻿@page
+@model Rovie.Pages.ContactsModel
+@{
+    ViewData["Title"] = "Контакты";
+}
+<br>
+<br>
+<br>
+<br>
+
+
+
+<div class="text-center" style="width:960px; align-content:center; margin-left:160px">
+    <h class="display-4">Контакты</h>
+    <p></p>
+    <p>Email: kapoor.darya@gmai.com</p>
+    <p>Telegram: &#64;DariaAres</p>
+    <p>Phone: +375 (29) 196-32-50</p>
+
+<div class="slideshow-container">
+
+    <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="https://destinationlesstravel.com/wp-content/uploads/2020/07/The-Fuego-Volcano-960x640.jpg.webp" alt="Природа" style="width:500px;height:300px">
+        <div class="text">ADVANTURE</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+            <img src="https://destinationlesstravel.com/wp-content/uploads/2020/07/IMG_20171003_151822-1-1092x667-1-1024x625.jpg.webp" alt="Лес" style="width:500px;height:300px">
+        <div class="text">ADVANTURE</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+            <img src="https://destinationlesstravel.com/wp-content/uploads/2020/07/DSC_0463-1009x721.jpg.webp" alt="Горы" style="width:500px;height:300px">
+        <div class="text">ADVANTURE</div>
+    </div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+</div>
+</div>
+<script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 2000); // Меняйте изображение каждые 2 секунды
+    }
+</script>
