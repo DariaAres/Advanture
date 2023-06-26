@@ -1,24 +1,25 @@
 ﻿@page
 @model CreateRoom
 @{
-    ViewData["Title"] = "Создание комнаты";
+    ViewData["Title"] = "Отправить комментарий";
 }
+<br>
+<br>
+<br>
+<br>
 <h1>@ViewData["Title"]</h1>
 
 
 <div class="row">
     <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h2>Заполните форму.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
-                <input asp-for="Name" class="form-control" aria-required="true"/>
-                <label asp-for="Name"></label>
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <input asp-for="Name" name="message" type ="text"class="form-control" aria-required="true"/>
+                <input type="submit" class="w-100 btn btn-lg btn-primary" value="Отправить"/>
             </div>
-            
-            <button type="submit" class="w-100 btn btn-lg btn-primary" asp-page-handler="OnClick">Создать</button>
         </form>
     </div>
 </div>
